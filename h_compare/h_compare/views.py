@@ -1,4 +1,4 @@
-__author__ = 't-yaz'
+__author__ = 'Yang ZHANG'
 
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
