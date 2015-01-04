@@ -1,5 +1,27 @@
 {% extends "_base.html" %}
 {% block title_extend %} | Home {% endblock %}
+{% block body_id %}id="home"{% endblock %}
 {% block content %}
-
+    <form action="/compare/" method="post">
+        <div class="wrapper">
+            <div class="row">
+                <div class="six columns field">
+                    <input class="input" type="text" placeholder="URL 1" name="url_1">
+                </div>
+                <div class="six columns field">
+                    <input class="input" type="text" placeholder="URL 2" name="url_2">
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="row">
+                <div class="six columns centered">
+                    <div class="medium primary btn">
+                        <button type="submit">Compare!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
 {% endblock %}

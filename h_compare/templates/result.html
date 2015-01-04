@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+{% block css %}
+    <style>
+        .diff * {
+            font-family: "Monaco", "Consolas", monospace;
+            font-size: 12px !important;
+        }
+
+        .diff_next {
+            text-align: center;
+        }
+
+        table {
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+        tbody {
+            border-top: 2px solid #3085D6;
+            border-bottom: 2px solid #3085D6;
+        }
+
+        table thead th, table tbody td, table tr td {
+            padding: 0;
+        }
+
+        .diff_chg {
+            background-color: #ACD4FD;
+        }
+
+        .diff_sub {
+            background-color: #ffabab;
+        }
+
+        .diff_add {
+            background-color: #f1ff9b;
+        }
+
+        tr > td:nth-child(3), tr > td:nth-child(6) {
+            width: 780px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% autoescape off %}{{ result }}{% endautoescape %}
+{% endblock %}
+{% block script %}
+    <script>
+        "use strict";
+        {% comment %}$(function () {
+            var width = window.innerWidth;
+            var rows = $(document).find("tr");
+            var pre_width = rows.eq(1).find("td").eq(0).width() + rows.eq(1).find("td").eq(1).width();
+            for (var i = 0; i < rows.length; i++) {
+                rows.eq(i).find("td").eq(2).attr("width", width / 2 + pre_width).removeAttr("nowrap");
+                rows.eq(i).find("td").eq(5).attr("width", width / 2 + pre_width).removeAttr("nowrap");
+            }
+        });{% endcomment %}
+    </script>
+{% endblock %}
