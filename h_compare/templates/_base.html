@@ -77,7 +77,7 @@ Or concatenate and minify into a single file
 <!--
 Google's recommended deferred loading of JS
 gumby.min.js contains gumby.js, all UI modules and gumby.init.js-->
-{% comment %}<script type="text/javascript">
+<script type="text/javascript">
     function downloadJSAtOnload() {
         var element = document.createElement("script");
         element.src = "{% static "js/libs/gumby.min.js" %}";
@@ -88,7 +88,7 @@ gumby.min.js contains gumby.js, all UI modules and gumby.init.js-->
     else if (window.attachEvent)
         window.attachEvent("onload", downloadJSAtOnload);
     else window.onload = downloadJSAtOnload;
-</script>{% endcomment %}
+</script>
 
 <script src="{% static "js/plugins.js" %}"></script>
 

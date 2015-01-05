@@ -20,7 +20,7 @@
             border-bottom: 2px solid #3085D6;
         }
 
-        table thead th, table tbody td, table tr td {
+        table:not(.table) thead th, table:not(.table) tbody td, table:not(.table) tr td {
             padding: 0;
         }
 
@@ -42,19 +42,75 @@
     </style>
 {% endblock %}
 {% block content %}
+    <a class="label default switch" gumby-trigger="#result-modal"
+       style="position: fixed; top: 0; right: 0; cursor: pointer;">BACK TO RESULT STATS</a>
     {% autoescape off %}{{ result }}{% endautoescape %}
+    <div class="modal active" id="result-modal">
+        <div class="content">
+            <a class="close switch active" gumby-trigger="|#result-modal"><i class="icon-cancel"></i></a>
+
+            <div class="row">
+                <div class="ten columns centered text-center">
+                    <h2>RESULT</h2>
+
+                    <div class="row">
+                        <div class="six columns text-center">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Differences</th>
+                                    <th>#</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="background-color: #ACD4FD">change</td>
+                                    <td id="result-chg"></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #ffabab">add</td>
+                                    <td id="result-add"></td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #f1ff9b">delete</td>
+                                    <td id="result-sub"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="six columns text-center">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Links</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>(f)irst change</td>
+                                </tr>
+                                <tr>
+                                    <td>(n)ext change</td>
+                                </tr>
+                                <tr>
+                                    <td>(t)op</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block script %}
     <script>
         "use strict";
-        {% comment %}$(function () {
-            var width = window.innerWidth;
-            var rows = $(document).find("tr");
-            var pre_width = rows.eq(1).find("td").eq(0).width() + rows.eq(1).find("td").eq(1).width();
-            for (var i = 0; i < rows.length; i++) {
-                rows.eq(i).find("td").eq(2).attr("width", width / 2 + pre_width).removeAttr("nowrap");
-                rows.eq(i).find("td").eq(5).attr("width", width / 2 + pre_width).removeAttr("nowrap");
-            }
-        });{% endcomment %}
+        $(function () {
+            $(document).find("#result-chg").text($(document).find(".diff_chg").length);
+            $(document).find("#result-add").text($(document).find(".diff_add").length);
+            $(document).find("#result-sub").text($(document).find(".diff_sub").length);
+        });
     </script>
 {% endblock %}
