@@ -1,4 +1,4 @@
-__author__ = 't-yaz'
+__author__ = 'Yang ZHANG'
 import difflib
 import requests
 from bs4 import BeautifulSoup
