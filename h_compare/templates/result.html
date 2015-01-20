@@ -39,6 +39,10 @@
         tr > td:nth-child(3), tr > td:nth-child(6) {
             width: 780px;
         }
+
+        .modal > .content {
+            width: 70%;
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -101,6 +105,73 @@
                     </div>
                 </div>
             </div>
+            <h4 class="row text-center">
+                #tocnav
+            </h4>
+            <section class="row">
+                {% for i in result_dict|get_item:"diff_tocnav" %}
+                    <article class="six columns" style="word-break: break-all;">
+                        {% if i|length_is:0 %}
+                            <p>Nothing to show.</p>
+                        {% else %}
+                            {% for j in i %}
+                                <p style="font-family: 'Monaco', 'Source Code Pro', 'Consolas', mono, serif">
+                                    {% for t in j|get_item:"tag" %}{{ t }}{% endfor %}
+                                    {% if not j|get_item:"id"|length_is:0 %}{% for k in j|get_item:"id" %}
+                                        <span style="color: #378c52">#{{ k }}</span>{% endfor %}{% endif %}
+                                    {% if not j|get_item:"class"|length_is:0 %}{% for k in j|get_item:"class" %}
+                                        <span style="color: #7097af; font-style: italic">.{{ k }}</span>
+                                    {% endfor %}{% endif %}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </section>
+            <h4 class="row text-center">
+                Headings
+            </h4>
+            <section class="row">
+                {% for i in result_dict|get_item:"diff_headings" %}
+                    <article class="six columns" style="word-break: break-all;">
+                        {% if i|length_is:0 %}
+                            <p>Nothing to show.</p>
+                        {% else %}
+                            {% for j in i %}
+                                <p style="font-family: 'Monaco', 'Source Code Pro', 'Consolas', mono, serif">
+                                    {{ j.0 }}<span style="font-weight: 600;"> {{ j.1 }}</span></p>
+                            {% endfor %}
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </section>
+            <h4 class="row text-center">
+                .topic
+            </h4>
+            <section class="row">
+                {% for i in result_dict|get_item:"diff_topic" %}
+                    <article class="six columns" style="word-break: break-all;">
+                        {% if i|length_is:0 %}
+                            <p>Nothing to show.</p>
+                        {% else %}
+                            {% for j in i %}
+                                <p style="font-family: 'Monaco', 'Source Code Pro', 'Consolas', mono, serif">
+                                    {% for t in j|get_item:"tag" %}{{ t }}{% endfor %}
+                                    {% if not j|get_item:"id"|length_is:0 %}{% for k in j|get_item:"id" %}
+                                        <span style="color: #378c52">#{{ k }}</span>{% endfor %}{% endif %}
+                                    {% if not j|get_item:"class"|length_is:0 %}{% for k in j|get_item:"class" %}
+                                        <span style="color: #7097af; font-style: italic">.{{ k }}</span>
+                                    {% endfor %}{% endif %}
+                                    {% if not j|get_item:"alt" == None %}
+                                        <span>alt="{% for k in j|get_item:"alt" %}{{ k }}{% endfor %}"</span>{% endif %}
+                                    {% if not j|get_item:"title" == None %}
+                                        <span>title="{% for k in j|get_item:"title" %}{{ k }}{% endfor %}"</span>{% endif %}
+                                    {% if not j|get_item:"file" == None %}
+                                        <span>src="{{ j|get_item:"file" }}"</span>{% endif %}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            </section>
         </div>
     </div>
 {% endblock %}
